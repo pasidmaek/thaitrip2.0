@@ -1,1 +1,0 @@
-# thaitrip2.0
