@@ -8,3 +8,8 @@ npx react-native-asset
 npx expo install @shopify/flash-list
 
 npm install axios
+
+npm i expo-image
+
+# install multi language
+npm install react-i18next i18next --save

@@ -1,53 +1,34 @@
-import { LayoutAnimation, Pressable, StyleSheet } from "react-native";
+import { LayoutAnimation, Pressable, StyleSheet, TouchableOpacity } from "react-native";
 import React, { useRef, useState } from "react";
 import { FlashList } from "@shopify/flash-list";
 import PlaceRecommendCard from "../Cards/PlaceRecommendCard";
 
-const DATA = [
-  {
-    title: "First Item",
-  },
-  {
-    title: "Second Item",
-  },
-  {
-    title: "Third Item",
-  },
-  {
-    title: "Second Item",
-  },
-  {
-    title: "Second Item",
-  },
-];
+interface Props {
+  data: PlaceDataType[];
+}
 
-const RecommendLists = () => {
+const RecommendLists = ({ data }: Props) => {
   const pressItem = (item: string) => {
     console.log(item);
   };
 
   return (
     <FlashList
-      data={DATA}
+      data={data.slice(0, 10)}
       horizontal
-      contentContainerStyle={
-        {
-          // backgroundColor: "black",
-        }
-      }
       showsHorizontalScrollIndicator={false}
       keyExtractor={(item, index) => index.toString()}
       renderItem={({ item, index }) => (
-        <Pressable
-          onPress={() => pressItem(item.title)}
+        <TouchableOpacity
+          onPress={() => pressItem(item.place_id)}
           style={{
             marginLeft: index === 0 ? 16 : 0,
-            marginRight: index === DATA.length - 1 ? 16 : 0,
-            marginVertical: 10,
+            marginRight: index !== data.length - 1 ? 16 : 0,
+            marginVertical: 20,
           }}
         >
-          <PlaceRecommendCard placeData={item.title} />
-        </Pressable>
+          <PlaceRecommendCard placeData={item} />
+        </TouchableOpacity>
       )}
       estimatedItemSize={200}
     />
